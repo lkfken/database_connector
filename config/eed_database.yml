@@ -1,0 +1,28 @@
+default: &default
+  adapter: jdbc
+
+jruby:
+  production:
+    <<: *default
+    database: jdbc:sqlserver://<%= ENV['DB_SERVER'] %>;databaseName=<%= ENV['EED_DATABASE'] %>;user=<%= ENV['DB_USER'] %>;password=<%= ENV['DB_PASSWORD'] %>
+
+ruby:
+  default: &default_ruby
+    adapter: tinytds
+  production:
+    <<: *default_ruby
+    user: <%= ENV['DB_USER'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
+    database: <%= ENV['EED_DATABASE'] %>
+    dataserver: <%= ENV['DB_SERVER'] %>
+
+ruby2.3:
+  default: &default_ruby
+    adapter: tinytds
+
+  production:
+    <<: *default_ruby
+    user: <%= ENV['DB_USER'] %>
+    password: <%= ENV['DB_PASSWORD'] %>
+    database: <%= ENV['EED_DATABASE'] %>
+    dataserver: <%= ENV['DB_SERVER'] %>
